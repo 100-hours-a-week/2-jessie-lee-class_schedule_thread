@@ -1,7 +1,7 @@
 import view.OutputView;
 
 public class TimeoutThread extends Thread {
-    private static final int SESSION_TIME = 20; // 60초
+    private static final int SESSION_TIME = 20; // 20초
     private boolean isRunning = true;
     private final OutputView outputView = new OutputView();
 
@@ -12,6 +12,7 @@ public class TimeoutThread extends Thread {
         while (isRunning && remainingTime > 0) {
             try {
                 if (remainingTime % 10 == 0) {
+                    // 10초마다 프린트
                     outputView.printRemainingTime(remainingTime);
                 }
                 Thread.sleep(1000); // 1초 대기
