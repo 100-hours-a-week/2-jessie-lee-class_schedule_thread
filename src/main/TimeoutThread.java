@@ -11,12 +11,9 @@ public class TimeoutThread extends Thread {
 
         while (isRunning && remainingTime > 0) {
             try {
-                if (remainingTime % 10 == 0) {
-                    // 10초마다 프린트
-                    outputView.printRemainingTime(remainingTime);
-                }
-                Thread.sleep(1000); // 1초 대기
-                remainingTime--;
+                outputView.printRemainingTime(remainingTime);
+                Thread.sleep(10000); // 10초 대기
+                remainingTime -= 10;
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;
@@ -24,7 +21,6 @@ public class TimeoutThread extends Thread {
         }
 
         if (remainingTime <= 0 && isRunning) {
-            System.out.println("\n\n"); // 현재 입력 줄을 깨끗이 지우기 위한 개행
             outputView.printSessionTimeout();
             System.exit(0);
         }
