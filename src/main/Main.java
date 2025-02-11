@@ -5,8 +5,11 @@ public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
 
-        while(true){
+        while(true) {
             Parent parent = controller.parentLogin();
+
+            TimeoutThread sessionTimer = new TimeoutThread();
+            sessionTimer.start();
 
             controller.printWelcomeAndSchedule();
 
@@ -15,11 +18,13 @@ public class Main {
             controller.inputSchedule(child);
 
             boolean isEnd = controller.askEnd();
+
+            sessionTimer.stopThread();
+
             if(isEnd) {
                 controller.endProgram();
                 break;
             }
-
         }
     }
 }
